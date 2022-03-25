@@ -254,26 +254,20 @@ Resources:
   WebServerSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:
-      Tags:
-        - Key: Name
-          Value: !Sub ${EnvironmentName} WebServerSecurityGroup
       GroupDescription: Enable SSH access and HTTP from 0.0.0.0/0
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: '22'
           ToPort: '22'
           CidrIp: !Ref SSHLocation
-          Tags:
-            - Key: Name
-              Value: !Sub Allowing SSH
         - IpProtocol: tcp
           FromPort: '80'
           ToPort: '80'
           CidrIp: 0.0.0.0/0
-          Tags:
-            - Key: Name
-              Value: !Sub Allowing Web on 80
       VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: !Sub ${EnvironmentName} WebServerSecurityGroup
 
   # MyLaunchTemplate:
   #  Type: AWS::EC2::LaunchTemplate
